@@ -1,0 +1,3 @@
+Ks Ac Ad Kc 0h 3h 5d; 4s 2s Ad Kc 0h 3h 5d
+Ks Ac Ad Kc 0h 3h 5d; 4s 2s Ad Kc 0h 3h Ks
+Ks Ac Ad Kc 0h 3h 5d; 4s 2s Ad Kc 0h 3h 5d 1s
