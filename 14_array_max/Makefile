@@ -1,2 +1,2 @@
-arrayMax: arrayMax.c
-	gcc -o arrayMax -pedantic -std=gnu99 -Wall -Werror arrayMax.c
+arrayMax:
+	gcc -o arrayMax -std=gnu99 -pedantic -Wall arrayMax.c
