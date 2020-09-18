@@ -8,15 +8,17 @@ void reverse(char * str) {
     str1++;
   }
   int len = str1 - str ;
-  char tmp[len];
-  for (int i = 0; i < len ; i++){
-    tmp[i] = *str;
-    str++;
-  }
-  str--;
-  for (int i = 0; i < len ; i++){
-    *str = tmp[i];
+  if(len>1){
+    char tmp[len];
+    for (int i = 0; i < len ; i++){
+      tmp[i] = *str;
+      str++;
+    }
     str--;
+    for (int i = 0; i < len ; i++){
+      *str = tmp[i];
+      str--;
+    }
   }
 }
 
