@@ -3,6 +3,9 @@
 #include <string.h>
 
 void reverse(char * str) {
+  if(str == NULL){
+    return;
+  }
   char * str1 = str ;
   while ( *str1 != '\0'){
     str1++;
