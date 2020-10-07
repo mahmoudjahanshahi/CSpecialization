@@ -1,4 +1,4 @@
-Grading at Wed Oct  7 13:45:44 UTC 2020
+Grading at Wed Oct  7 13:53:20 UTC 2020
 Compiling deck.c
 Compiling cards.c
 Linking cards.o deck.o deck-c4.o and the grader's .o file
