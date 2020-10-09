@@ -74,7 +74,7 @@ size_t find_secondary_pair(deck_t* hand, unsigned* match_counts, size_t match_id
 	return i;
       }
     }
-    else if (i > match_idx + match_counts[match_idx]) {
+    else if (i >= match_idx + match_counts[match_idx]) {
       if (match_counts[i] > 1) {
 	return i;
       }
