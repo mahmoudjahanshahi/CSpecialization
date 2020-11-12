@@ -28,7 +28,7 @@ int arrayMax(int* array) {
 void decrypt(int n) {
   int key;
   int diff = n - 23;
-  if (diff > 0) {
+  if (diff >= 0) {
     key = diff;
   }
   else {
@@ -39,7 +39,7 @@ void decrypt(int n) {
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    fprintf(stderr, "Usage: decrypt inputFileName\n");
+    fprintf(stderr, "Usage: breaker inputFileName\n");
     return EXIT_FAILURE;
   }
   FILE* f = fopen(argv[1], "r");
