@@ -31,11 +31,11 @@ int main(int argc, char** argv) {
   int row = 0;
   while (fgets(tmp, 12, f) != NULL) {
     if (strchr(tmp, '\n') == NULL) {
-      printf("Line is too long!\n");
+      perror("Line is too long!");
       return EXIT_FAILURE;
     }
     if (strchr(tmp, '\0') != &tmp[11]) {
-      printf("Line is too short!\n");
+      perror("Line is too short!");
       return EXIT_FAILURE;
     }
     for (int j = 0; j < 10; j++) {
