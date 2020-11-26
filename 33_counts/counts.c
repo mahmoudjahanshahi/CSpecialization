@@ -45,7 +45,7 @@ void printCounts(counts_t * c, FILE * outFile) {
     exit(EXIT_FAILURE);
   }
   for (size_t i = 0; i < c->size; i++) {
-    fprintf(f, "'%s': %d\n", c->array[i]->string, (int)c->array[i]->count);
+    fprintf(f, "%s: %d\n", c->array[i]->string, (int)c->array[i]->count);
   }
   if (c->unknown > 0) {
     fprintf(f, "<unknown>: %d\n", (int)c->unknown);
