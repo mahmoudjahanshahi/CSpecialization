@@ -52,7 +52,7 @@ card_t* add_empty_card(deck_t* d) {
   card_t* empty = malloc(sizeof(*empty));
   empty->value = 0;
   empty->suit = 0;
-  add_card_to(d, empty);
+  add_card_to(d, *empty);
   return d->cards[d->n_cards - 1];
 }
 
@@ -78,7 +78,7 @@ deck_t* build_remaining_deck(deck_t** hands, size_t n_hands) {
   excluded_cards.n_cards = 0;
   for (size_t i = 0; i < n_hands; i++) {
     for (size_t j = 0; j < hands[i]->n_cards; j++) {
-      add_card_to(&excluded_cards, hands[i]->cards[j]);
+      add_card_to(&excluded_cards, *hands[i]->cards[j]);
     }
   }
   deck_t* d = make_deck_exclude(&excluded_cards);
@@ -88,8 +88,8 @@ deck_t* build_remaining_deck(deck_t** hands, size_t n_hands) {
 
 void free_deck(deck_t* d) {
   for (size_t i = 0; i < d->n_cards; i++) {
-    free(d->cards[i])
-      }
+    free(d->cards[i]);
+  }
   free(d->cards);
   free(d);
 }
