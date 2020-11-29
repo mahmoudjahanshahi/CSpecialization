@@ -1,0 +1,23 @@
+Grading at Sun Nov 29 13:40:30 UTC 2020
+Compiling deck.c -> deck.o
+deck.c: In function ‘add_empty_card’:
+deck.c:55:18: error: incompatible type for argument 2 of ‘add_card_to’
+   add_card_to(d, empty);
+                  ^
+deck.c:45:6: note: expected ‘card_t {aka struct card_tag}’ but argument is of type ‘card_t * {aka struct card_tag *}’
+ void add_card_to(deck_t* d, card_t c) {
+      ^
+deck.c: In function ‘build_remaining_deck’:
+deck.c:81:36: error: incompatible type for argument 2 of ‘add_card_to’
+       add_card_to(&excluded_cards, hands[i]->cards[j]);
+                                    ^
+deck.c:45:6: note: expected ‘card_t {aka struct card_tag}’ but argument is of type ‘card_t * {aka struct card_tag *}’
+ void add_card_to(deck_t* d, card_t c) {
+      ^
+deck.c: In function ‘free_deck’:
+deck.c:92:7: error: expected ‘;’ before ‘}’ token
+       }
+       ^
+Compilation of deck.c failed
+
+Overall Grade: F
