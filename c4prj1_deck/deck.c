@@ -43,16 +43,19 @@ void assert_full_deck(deck_t* d) {
 }
 
 void add_card_to(deck_t* d, card_t c) {
+  card_t* newcard = malloc(sizeof(*newcard));
+  newcard->value = c.value;
+  newcard->suit = c.suit;
   d->cards = realloc(d->cards, (d->n_cards + 1) * sizeof(*d->cards));
-  d->cards[d->n_cards] = &c;
+  d->cards[d->n_cards] = newcard;
   d->n_cards++;
 }
 
 card_t* add_empty_card(deck_t* d) {
-  card_t* empty = malloc(sizeof(*empty));
-  empty->value = 0;
-  empty->suit = 0;
-  add_card_to(d, *empty);
+  card_t empty ;
+  empty.value = 0;
+  empty.suit = 0;
+  add_card_to(d, empty);
   return d->cards[d->n_cards - 1];
 }
 
@@ -61,28 +64,26 @@ deck_t* make_deck_exclude(deck_t* excluded_cards) {
   d->cards = NULL;
   d->n_cards = 0;
   for (unsigned i = 0 ; i < 52 ; i++ ) {
-    card_t* c = malloc(sizeof(*c));
-    *c = card_from_num(i);
-    if (deck_contains(excluded_cards, *c) == 1) {
-      free(c);
+    card_t c = card_from_num(i);
+    if (deck_contains(excluded_cards, c) == 1) {
       continue;
     }
-    add_card_to(d, *c);
+    add_card_to(d, c);
   }
   return d;
 }
 
 deck_t* build_remaining_deck(deck_t** hands, size_t n_hands) {
-  deck_t excluded_cards;
-  excluded_cards.cards = NULL;
-  excluded_cards.n_cards = 0;
+  deck_t* excluded_cards = malloc(sizeof(*excluded_cards));
+  excluded_cards->cards = NULL;
+  excluded_cards->n_cards = 0;
   for (size_t i = 0; i < n_hands; i++) {
     for (size_t j = 0; j < hands[i]->n_cards; j++) {
-      add_card_to(&excluded_cards, *hands[i]->cards[j]);
+      add_card_to(excluded_cards, *hands[i]->cards[j]);
     }
   }
-  deck_t* d = make_deck_exclude(&excluded_cards);
-  free(excluded_cards.cards);
+  deck_t* d = make_deck_exclude(excluded_cards);
+  free_deck(excluded_cards);
   return d;
 }
 
