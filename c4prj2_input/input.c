@@ -13,6 +13,9 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   const char* ptr = str;
   while (*ptr != '\n') {
     char* space = strchr(ptr, ' ');
+    if (space == NULL) {
+      space = strchr(ptr, '\n');
+    }
     if (*ptr == '?') {
       card_t* empty = add_empty_card(hand);
       int index;
