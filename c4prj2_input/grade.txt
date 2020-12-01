@@ -1,0 +1,22 @@
+Grading at Tue Dec  1 10:20:49 UTC 2020
+Compiling cards.c -> cards.o
+Compiling deck.c -> deck.o
+Compiling input.c -> input.o
+input.c: In function ‘hand_from_string’:
+input.c:10:15: error: initialization discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+   char* ptr = str;
+               ^
+input.c:12:31: error: passing argument 2 of ‘strcmp’ makes pointer from integer without a cast [-Werror=int-conversion]
+     char* space = strcmp(ptr, ' ');
+                               ^
+In file included from input.c:3:0:
+/usr/include/string.h:140:12: note: expected ‘const char *’ but argument is of type ‘int’
+ extern int strcmp (const char *__s1, const char *__s2)
+            ^
+input.c:12:19: error: initialization makes pointer from integer without a cast [-Werror=int-conversion]
+     char* space = strcmp(ptr, ' ');
+                   ^
+cc1: all warnings being treated as errors
+Compilation of input.c failed
+
+Overall Grade: F
