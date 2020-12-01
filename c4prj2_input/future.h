@@ -1,7 +1,9 @@
 #ifndef FUTURE_H
 #define FUTURE_H
+#include <stdlib.h>
+#include <stdin.h>
 #include "deck.h"
-
+#include "cards.h"
 
 struct future_cards_tag {
   deck_t * decks;
