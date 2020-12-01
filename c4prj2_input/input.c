@@ -12,6 +12,7 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   hand->n_cards = 0;
   const char* ptr = str;
   int true = 1;
+  size_t index;
   while (true == 1) {
     char* space = strchr(ptr, ' ');
     if (space == NULL) {
@@ -20,7 +21,6 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
     }
     if (*ptr == '?') {
       card_t* empty = add_empty_card(hand);
-      int index;
       if ((space - ptr) == 2) {
 	index = *(ptr + 1) - 48;
       }
