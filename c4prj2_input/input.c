@@ -29,11 +29,9 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
       size_t index;
       if ((space - ptr) == 2) {
 	index = *(ptr + 1) - 48;
-	printf("index: %d\n", index);
       }
       else {
 	index = ((*(ptr + 1) - 48) * 10) + (*(ptr + 2) - 48);
-	printf("index: %d\n", index);
       }
       add_future_card(fc, index, empty);
     }
