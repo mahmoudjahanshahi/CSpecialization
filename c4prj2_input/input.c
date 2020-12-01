@@ -11,10 +11,12 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   hand->cards = NULL;
   hand->n_cards = 0;
   const char* ptr = str;
-  while (*ptr != '\n') {
+  int true = 1;
+  while (true == 1) {
     char* space = strchr(ptr, ' ');
     if (space == NULL) {
       space = strchr(ptr, '\n');
+      true = 0;
     }
     if (*ptr == '?') {
       card_t* empty = add_empty_card(hand);
