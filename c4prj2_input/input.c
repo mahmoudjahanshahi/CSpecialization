@@ -6,7 +6,6 @@
 #include "future.h"
 #include "cards.h"
 
-
 deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   deck_t* hand = malloc(sizeof(*hand));
   hand->cards = NULL;
@@ -14,10 +13,15 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   const char* ptr = str;
   while (*ptr != '\n') {
     char* space = strchr(ptr, ' ');
-    *space = '\0';
     if (*ptr == '?') {
       card_t* empty = add_empty_card(hand);
-      int index = atoi(ptr + 1);
+      int index;
+      if ((space - ptr) == 2) {
+	index = *(ptr + 1) - 48;
+      }
+      else {
+	index = ((*(ptr + 1) - 48) * 10) + (*(ptr + 2) - 48);
+      }
       add_future_card(fc, index, empty);
     }
     else {
