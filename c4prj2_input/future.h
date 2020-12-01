@@ -1,7 +1,7 @@
 #ifndef FUTURE_H
 #define FUTURE_H
 #include <stdlib.h>
-#include <stdin.h>
+#include <stdio.h>
 #include "deck.h"
 #include "cards.h"
 
