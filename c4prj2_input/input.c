@@ -12,7 +12,12 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
   hand->n_cards = 0;
   const char* ptr = str;
   int true = 1;
-  size_t index;
+  while (*ptr == ' ') {
+    ptr++;
+  }
+  if (*ptr == '\n') {
+    true = 0;
+  }
   while (true == 1) {
     char* space = strchr(ptr, ' ');
     if (space == NULL) {
@@ -21,11 +26,14 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
     }
     if (*ptr == '?') {
       card_t* empty = add_empty_card(hand);
+      size_t index;
       if ((space - ptr) == 2) {
 	index = *(ptr + 1) - 48;
+	printf("index: %d\n", index);
       }
       else {
 	index = ((*(ptr + 1) - 48) * 10) + (*(ptr + 2) - 48);
+	printf("index: %d\n", index);
       }
       add_future_card(fc, index, empty);
     }
@@ -34,6 +42,12 @@ deck_t* hand_from_string(const char* str, future_cards_t* fc) {
       add_card_to(hand, c);
     }
     ptr = space + 1;
+    while (true == 1 && *ptr == ' ') {
+      ptr++;
+    }
+    if (*ptr == '\n') {
+      true = 0;
+    }
   }
   if (hand->n_cards < 5) {
     perror("Less than 5 cards in hand!");
