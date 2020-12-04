@@ -1,0 +1,65 @@
+Grading at Fri Dec  4 11:04:38 UTC 2020
+Running 'make clean' to do a clean build of your project
+rm -f  eval.o  deck.o  future.o  cards.o  main.o  input.o poker *~
+Running 'make poker OTHERFLAGS=-O3' to build your project
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 eval.c
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 deck.c
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 future.c
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 cards.c
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 main.c
+gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 input.c
+gcc -Wall -Werror -std=gnu99 -pedantic -ggdb3 -o poker  eval.o  deck.o  future.o  cards.o  main.o  input.o
+ - Starting with some Texas Hold'em hands
+Running a simulation with 20000 draws for 2 hands...
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Test case passed!    
+Running a simulation with 25000 draws for 3 hands...
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+You dont seem to have the right total draws.
+Yours sum to 0 but I expected 25000
+Running a simulation with 25000 draws for 3 hands...
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Hand 2 was close enough to our answer
+    Test case passed!    
+Running a simulation with 25000 draws for 2 hands...
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Test case passed!    
+Running a simulation with 80000 draws for 4 hands...
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Hand 2 was close enough to our answer
+    Hand 3 was close enough to our answer
+    Test case passed!    
+Running a simulation with 30000 draws for 2 hands...
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Test case passed!    
+ - Next, few Seven Card Stud hands
+Running a simulation with 30000 draws for 2 hands...
+Could not find the win percent in your output
+Could not find the win percent in your output
+You dont seem to have the right total draws.
+Yours sum to 0 but I expected 30000
+Running a simulation with 40000 draws for 3 hands...
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+You dont seem to have the right total draws.
+Yours sum to 0 but I expected 40000
+ - Then one from a completely made up poker variant
+Running a simulation with 100000 draws for 6 hands...
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+Could not find the win percent in your output
+You dont seem to have the right total draws.
+Yours sum to 0 but I expected 100000
+
+Overall Grade: F
