@@ -25,24 +25,28 @@ suit_t flush_suit(deck_t* hand) {
       if (c >= 5) {
 	return CLUBS;
       }
+      continue;
     }
     if (hand->cards[i]->suit == DIAMONDS) {
       d++;
       if (d >= 5) {
 	return DIAMONDS;
       }
+      continue;
     }
     if (hand->cards[i]->suit == HEARTS) {
       h++;
       if (h >= 5) {
 	return HEARTS;
       }
+      continue;
     }
     if (hand->cards[i]->suit == SPADES) {
       s++;
       if (s >= 5) {
 	return SPADES;
       }
+      continue;
     }
   }
   return NUM_SUITS;
