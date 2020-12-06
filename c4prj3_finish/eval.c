@@ -22,32 +22,32 @@ suit_t flush_suit(deck_t* hand) {
   for (size_t i = 0; i < hand->n_cards; i++) {
     if (hand->cards[i]->suit == CLUBS) {
       c++;
-      if (c >= 5) {
-	return CLUBS;
-      }
       continue;
     }
     if (hand->cards[i]->suit == DIAMONDS) {
       d++;
-      if (d >= 5) {
-	return DIAMONDS;
-      }
       continue;
     }
     if (hand->cards[i]->suit == HEARTS) {
       h++;
-      if (h >= 5) {
-	return HEARTS;
-      }
       continue;
     }
     if (hand->cards[i]->suit == SPADES) {
       s++;
-      if (s >= 5) {
-	return SPADES;
-      }
       continue;
     }
+  }
+  if (c >= 5) {
+    return CLUBS;
+  }
+  if (d >= 5) {
+    return DIAMONDS;
+  }
+  if (h >= 5) {
+    return HEARTS;
+  }
+  if (s >= 5) {
+    return SPADES;
   }
   return NUM_SUITS;
 }
@@ -209,7 +209,7 @@ unsigned* get_match_counts(deck_t* hand) {
     if (hand->cards[i]->value == last_value) {
       counter++;
       for (size_t j = 1; j < counter; j++) {
-	counts[i - j] ++;
+      counts[i - j] ++;
       }
       counts[i] = counts[i - 1];
     }
@@ -221,6 +221,31 @@ unsigned* get_match_counts(deck_t* hand) {
   }
   return counts;
 }
+
+//Used in gprof-test3
+/*
+unsigned* get_match_counts(deck_t* hand) {
+  unsigned* counts = malloc(hand->n_cards * sizeof(*counts));
+  size_t value = 1;
+  size_t step = 1;
+  for (size_t i = 1; i < hand->n_cards; i++) {
+    if (hand->cards[i]->value != hand->cards[i - 1]->value) {
+      step *= 10;
+    }
+    value = value + step;
+  }
+  size_t curser = 0;
+  while (value != 0) {
+    size_t curr_count = value % 10;
+    for (size_t i = curser; i < curser + curr_count; i++) {
+      counts[i] = curr_count;
+    }
+    curser += curr_count;
+    value /= 10;
+  }
+  return counts;
+}
+*/
 
 void copy_straight(card_t ** to, deck_t *from, size_t ind, suit_t fs, size_t count) {
   assert(fs == NUM_SUITS || from->cards[ind]->suit == fs);
