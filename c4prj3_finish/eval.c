@@ -197,13 +197,6 @@ int compare_hands(deck_t* hand1, deck_t* hand2) {
   return 0;
 }
 
-
-//You will write this function in Course 4.
-//For now, we leave a prototype (and provide our
-//implementation in eval-c4.o) so that the
-//other functions we have provided can make
-//use of get_match_counts.
-
 unsigned* get_match_counts(deck_t* hand) {
   unsigned* counts = malloc(hand->n_cards * sizeof(*counts));
   unsigned last_value = 0;
@@ -225,15 +218,6 @@ unsigned* get_match_counts(deck_t* hand) {
   return counts;
 }
 
-// We provide the below functions.  You do NOT need to modify them
-// In fact, you should not modify them!
-
-
-//This function copies a straight starting at index "ind" from deck "from".
-//This copies "count" cards (typically 5).
-//into the card array "to"
-//if "fs" is NUM_SUITS, then suits are ignored.
-//if "fs" is any other value, a straight flush (of that suit) is copied.
 void copy_straight(card_t ** to, deck_t *from, size_t ind, suit_t fs, size_t count) {
   assert(fs == NUM_SUITS || from->cards[ind]->suit == fs);
   unsigned nextv = from->cards[ind]->value;
@@ -253,12 +237,6 @@ void copy_straight(card_t ** to, deck_t *from, size_t ind, suit_t fs, size_t cou
   }
 }
 
-
-//This looks for a straight (or straight flush if "fs" is not NUM_SUITS)
-// in "hand".  It calls the student's is_straight_at for each possible
-// index to do the work of detecting the straight.
-// If one is found, copy_straight is used to copy the cards into
-// "ans".
 int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
   if (hand->n_cards < 5){
     return 0;
@@ -266,9 +244,9 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
   for(size_t i = 0; i <= hand->n_cards -5; i++) {
     int x = is_straight_at(hand, i, fs);
     if (x != 0){
-      if (x < 0) { //ace low straight
-	assert(hand->cards[i]->value == VALUE_ACE &&
-	       (fs == NUM_SUITS || hand->cards[i]->suit == fs));
+      if (x < 0) {
+	// assert(hand->cards[i]->value == VALUE_ACE &&
+	//       (fs == NUM_SUITS || hand->cards[i]->suit == fs));
 	ans->cards[4] = hand->cards[i];
 	size_t cpind = i+1;
 	while(hand->cards[cpind]->value != 5 ||
@@ -287,10 +265,6 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
   return 0;
 }
 
-
-//This function puts all the hand evaluation logic together.
-//This function is longer than we generally like to make functions,
-//and is thus not so great for readability :(
 hand_eval_t evaluate_hand(deck_t * hand) {
   suit_t fs = flush_suit(hand);
   hand_eval_t ans;
@@ -306,16 +280,16 @@ hand_eval_t evaluate_hand(deck_t * hand) {
   size_t match_idx = get_match_index(match_counts, hand->n_cards, n_of_a_kind);
   ssize_t other_pair_idx = find_secondary_pair(hand, match_counts, match_idx);
   free(match_counts);
-  if (n_of_a_kind == 4) { //4 of a kind
+  if (n_of_a_kind == 4) { 
     return build_hand_from_match(hand, 4, FOUR_OF_A_KIND, match_idx);
   }
-  else if (n_of_a_kind == 3 && other_pair_idx >= 0) {     //full house
+  else if (n_of_a_kind == 3 && other_pair_idx >= 0) {
     ans = build_hand_from_match(hand, 3, FULL_HOUSE, match_idx);
     ans.cards[3] = hand->cards[other_pair_idx];
     ans.cards[4] = hand->cards[other_pair_idx+1];
     return ans;
   }
-  else if(fs != NUM_SUITS) { //flush
+  else if(fs != NUM_SUITS) {
     ans.ranking = FLUSH;
     size_t copy_idx = 0;
     for(size_t i = 0; i < hand->n_cards;i++) {
@@ -329,14 +303,14 @@ hand_eval_t evaluate_hand(deck_t * hand) {
     }
     return ans;
   }
-  else if(find_straight(hand,NUM_SUITS, &ans)) {     //straight
+  else if(find_straight(hand,NUM_SUITS, &ans)) {
     ans.ranking = STRAIGHT;
     return ans;
   }
-  else if (n_of_a_kind == 3) { //3 of a kind
+  else if (n_of_a_kind == 3) {
     return build_hand_from_match(hand, 3, THREE_OF_A_KIND, match_idx);
   }
-  else if (other_pair_idx >=0) {     //two pair
+  else if (other_pair_idx >=0) {
     assert(n_of_a_kind ==2);
     ans = build_hand_from_match(hand, 2, TWO_PAIR, match_idx);
     ans.cards[2] = hand->cards[other_pair_idx];
@@ -344,11 +318,10 @@ hand_eval_t evaluate_hand(deck_t * hand) {
     if (match_idx > 0) {
       ans.cards[4] = hand->cards[0];
     }
-    else if (other_pair_idx > 2) {  //if match_idx is 0, first pair is in 01
-      //if other_pair_idx > 2, then, e.g. A A K Q Q
+    else if (other_pair_idx > 2) {
       ans.cards[4] = hand->cards[2];
     }
-    else {       //e.g., A A K K Q
+    else {
       ans.cards[4] = hand->cards[4];
     }
     return ans;

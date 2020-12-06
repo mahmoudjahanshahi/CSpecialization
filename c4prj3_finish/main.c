@@ -41,10 +41,11 @@ int main(int argc, char** argv) {
       if (compare_hands(input_hands[j], input_hands[winner]) > 0) {
 	winner = j;
 	tie = 0;
-	continue;
       }
-      if (compare_hands(input_hands[j], input_hands[winner]) == 0) {
-	tie = 1;
+      else {
+	if (compare_hands(input_hands[j], input_hands[winner]) == 0) {
+	  tie = 1;
+	}
       }
     }
     if (tie == 1) {
